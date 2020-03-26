@@ -32,23 +32,29 @@ btnAdd.addEventListener('click', function () {
 
 })
 
-btnAllDel.addEventListener('click', function(){
+btnAllDel.addEventListener('click', function(e){
     localStorage.clear()
     delAllTbl()
+    console.log(e);
 })
 
-btnAllDel.addEventListener('click', function(){
-    localStorage.clear()
-    delAllTbl()
-})
+
 
 
 
 function addTbl(val) {
 
     var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + val + '<button type="button" id="btn-del">delete</button></td>';
+    tr.innerHTML = '<td>' + val + '<button type="button" class="btn-del">delete</button></td>';
     tbl.appendChild(tr)
+    btnDel = document.getElementsByClassName('btn-del');
+
+
+
+
+    console.log(btnDel)
+    
+
 
 
     // var tr = document.createElement('tr'),
@@ -78,9 +84,28 @@ function delAllTbl() {
 
 
 function getStorage(){
+
+
+
+
+
+
+
     for (var i = 0; i < localStorage.length; i++) {
+
+
+
+        
         addTbl(localStorage.key(i))
+
+
+
+
+
     }
+
+
+
 }
 
 
