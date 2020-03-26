@@ -10,27 +10,32 @@ var inputTxt = null,
     
     inputTxt = document.getElementById('input-txt');
     btn = document.getElementById('btn');
-    btn = document.getElementById('btn');
+    tbl = document.getElementById('tbl');
 
 btn.addEventListener('click', function(){
     var val = inputTxt.value;
 
-    if (val === '') {
-        alert('입력하세요')
-        return;
-    }
+    // if (val === '') {
+    //     alert('입력하세요')
+    //     return;
+    // }
 
     
     
     localStorage.setItem(val, val)
-
-
     addTbl(val)
 
 })
 
 function addTbl(val) {
-    document.createElement()
+    var tr = document.createElement('tr'),
+        td = document.createElement('td'),
+        txt = document.createTextNode(val);
+
+        td.appendChild(txt)
+        tr.appendChild(td)
+        tbl.appendChild(tr)
+    
 }
 
 
