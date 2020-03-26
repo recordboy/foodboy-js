@@ -15,15 +15,31 @@ var inputTxt = null,
 btn.addEventListener('click', function(){
     var val = inputTxt.value;
 
-    // if (val === '') {
-    //     alert('입력하세요')
-    //     return;
-    // }
+    if (val === '') {
+        alert('입력 X')
+        return;
+    }
 
     
     
     localStorage.setItem(val, val)
-    addTbl(val)
+
+    
+
+    
+    
+    
+    
+    for (var i = 0; i < localStorage.length; i++) {
+        console.log(localStorage.key(i));
+
+    }
+
+
+
+
+
+    // addTbl(val)
 
 })
 
