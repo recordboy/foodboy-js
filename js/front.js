@@ -46,8 +46,9 @@ tbl.addEventListener('click', function (e) {
         localStorage.removeItem(e.target.previousSibling.data)
     }
 })
+
 btnSelect.addEventListener('click', function (e) {
-    selectPoint()
+    randomSelect()
 })
 
 function addTbl(val) {
@@ -70,20 +71,29 @@ function getStorage() {
     }
 }
 
+function randomSelect() {
+    var ran = Math.floor(Math.random() * localStorage.length) + 1;
+    selectPoint(ran)
+}
+
 function selectPoint() {
+
     if (selectNum === 0) {
-        selectStart(10, 25)
+        selectStart(10, 30)
     } else if (selectNum === 10) {
-        selectStart(15, 50)
+        selectStart(15, 60)
     } else if (selectNum === 15) {
         selectStart(20, 100)
     } else if (selectNum === 20) {
-        selectStart(25, 250)
+        selectStart(25, 300)
     } else if (selectNum === 30) {
         selectStart(33, 500)
     } else if (selectNum === 33) {
-        selectStart(35, 1000)
+        selectStart(35, 800)
     }
+
+
+
 }
 
 function selectStart(point, spped) {
@@ -93,9 +103,49 @@ function selectStart(point, spped) {
             clearInterval(selectSet)
             selectPoint()
         }
-        console.log(selectNum)
+        selectMove()
+        
     }, spped)
 }
+
+
+
+var current = 0,
+    prev = 0;
+
+
+function selectMove() {
+
+        current = selectNum % localStorage.length;
+
+        if (current === 0) {
+            prev = localStorage.length - 1;
+        } 
+        
+
+        console.log(current + '지금');
+        console.log(prev + '이전');
+
+
+        tbl.children[current].children[0].style.backgroundColor = '#ccc'
+        tbl.children[prev].children[0].style.backgroundColor = '#fff'
+
+        prev = current;
+
+
+
+
+        
+
+    
+
+
+    
+    
+
+    
+}
+
 
 
 
