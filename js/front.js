@@ -1,79 +1,54 @@
 
-
-
-
-
-
-var inputTxt = null,
+var input = null,
     btnAdd = null,
     btnAllDel = null,
     btnDel = null,
     tbl = null;
 
-inputTxt = document.getElementById('input-txt');
+input = document.getElementById('input-txt');
 btnAdd = document.getElementById('btn-add');
 btnAllDel = document.getElementById('btn-all-del');
 tbl = document.getElementById('tbl');
 
-
-getStorage()
-
-
 btnAdd.addEventListener('click', function () {
-    var val = inputTxt.value;
-
+    var val = input.value;
     if (val === '') {
         alert('입력 X')
         return;
     }
-
+    for (var i = 0;i < localStorage.length; i++) {
+        if (localStorage.getItem(val)) {
+            alert('중복')
+            return;
+        }
+    }
     localStorage.setItem(val, val)
     addTbl(val)
-
+    input.value = '';
 })
 
 btnAllDel.addEventListener('click', function(e){
     localStorage.clear()
     delAllTbl()
-    console.log(e);
 })
 
-
-
-
+tbl.addEventListener('click', function(e){
+    var trIdx = 0,
+        trTarget = null;
+    if (e.target.classList[0] === 'btn-del') {
+        trIdx = e.path[2].rowIndex;
+        trTarget = tbl.children[trIdx];
+        tbl.removeChild(trTarget);
+        localStorage.removeItem(e.target.previousSibling.data)
+    }
+})
 
 function addTbl(val) {
-
     var tr = document.createElement('tr');
     tr.innerHTML = '<td>' + val + '<button type="button" class="btn-del">delete</button></td>';
     tbl.appendChild(tr)
     btnDel = document.getElementsByClassName('btn-del');
-
-
-
-
-    console.log(btnDel)
-    
-
-
-
-    // var tr = document.createElement('tr'),
-    //     td = document.createElement('td'),
-    //     txt = document.createTextNode(val),
-    //     btnDel = document.createElement('button');
-    //     btnDelTxt = document.createTextNode('delete');
-
-    //     btnDel.type = 'button';
-    //     btnDel.classList = 'btn-del';
-
-    // td.appendChild(txt)
-    // td.appendChild(btnDel)
-    // btnDel.appendChild(btnDelTxt)
-    // tr.appendChild(td)
-    // tbl.appendChild(tr)
-
 }
-
 
 function delAllTbl() {
     var len = tbl.children.length;
@@ -82,32 +57,13 @@ function delAllTbl() {
     }
 }
 
-
 function getStorage(){
-
-
-
-
-
-
-
     for (var i = 0; i < localStorage.length; i++) {
-
-
-
-        
         addTbl(localStorage.key(i))
-
-
-
-
-
     }
-
-
-
 }
 
+getStorage()
 
 
 
