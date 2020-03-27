@@ -6,7 +6,11 @@ var input = null,
     btnSelect = null,
     tbl = null,
     selectSet = null,
-    selectNum = 0;
+    selectNum = 0,
+    randomNum = 0,
+    eventState = false;
+    moveNumNext = 0,
+    moveNumPrev = 0;
 
 input = document.getElementById('input-txt');
 btnAdd = document.getElementById('btn-add');
@@ -15,40 +19,51 @@ btnSelect = document.getElementById('btn-select');
 tbl = document.getElementById('tbl');
 
 btnAdd.addEventListener('click', function () {
-    var val = input.value;
-    if (val === '') {
-        alert('입력 X')
-        return;
-    }
-    for (var i = 0; i < localStorage.length; i++) {
-        if (localStorage.getItem(val)) {
-            alert('중복')
+    if (!eventState) {
+        var val = input.value;
+        if (val === '') {
+            alert('입력 X')
             return;
         }
+        for (var i = 0; i < localStorage.length; i++) {
+            if (localStorage.getItem(val)) {
+                alert('중복')
+                return;
+            }
+        }
+        localStorage.setItem(val, val)
+        addTbl(val)
+        input.value = '';
     }
-    localStorage.setItem(val, val)
-    addTbl(val)
-    input.value = '';
 })
 
 btnAllDel.addEventListener('click', function (e) {
-    localStorage.clear()
-    delAllTbl()
+    if (!eventState) {
+        localStorage.clear()
+        delAllTbl()
+    }
 })
 
 tbl.addEventListener('click', function (e) {
-    var trIdx = 0,
-        trTarget = null;
-    if (e.target.classList[0] === 'btn-del') {
-        trIdx = e.path[2].rowIndex;
-        trTarget = tbl.children[trIdx];
-        tbl.removeChild(trTarget);
-        localStorage.removeItem(e.target.previousSibling.data)
+    if (!eventState) {
+        var trIdx = 0,
+            trTarget = null;
+
+
+        if (e.target.classList[0] === 'btn-del') {
+            trIdx = e.path[2].rowIndex;
+            trTarget = tbl.children[trIdx];
+            tbl.removeChild(trTarget);
+            localStorage.removeItem(e.target.previousSibling.data)
+        }
     }
 })
 
 btnSelect.addEventListener('click', function (e) {
-    randomSelect()
+    if (!eventState) {
+        moveInit()
+        randomSelect()
+    }
 })
 
 function addTbl(val) {
@@ -72,28 +87,36 @@ function getStorage() {
 }
 
 function randomSelect() {
-    var ran = Math.floor(Math.random() * localStorage.length) + 1;
-    selectPoint(ran)
+    if (localStorage.length <= 1) {
+        alert('2개 이상 입력하세요.')
+        return;
+    }
+    eventState = true;
+    randomNum = Math.floor(Math.random() * localStorage.length) + 1;
+    selectNum = randomNum;
+    selectPoint()
+    setDisabled(true)
+    console.log('result index : ' + (randomNum + 30) % localStorage.length)
 }
 
 function selectPoint() {
-
-    if (selectNum === 0) {
-        selectStart(10, 30)
-    } else if (selectNum === 10) {
-        selectStart(15, 60)
-    } else if (selectNum === 15) {
-        selectStart(20, 100)
-    } else if (selectNum === 20) {
-        selectStart(25, 300)
-    } else if (selectNum === 30) {
-        selectStart(33, 500)
-    } else if (selectNum === 33) {
-        selectStart(35, 800)
+    if (selectNum === randomNum) {
+        selectStart(10 + randomNum, 30)
+    } else if (selectNum === 10 + randomNum) {
+        selectStart(15 + randomNum, 60)
+    } else if (selectNum === 15 + randomNum) {
+        selectStart(20 + randomNum, 120)
+    } else if (selectNum === 20 + randomNum) {
+        selectStart(25 + randomNum, 240)
+    } else if (selectNum === 25 + randomNum) {
+        selectStart(30 + randomNum, 400)
+    } else if (selectNum === 30 + randomNum) {
+        setTimeout(function(){
+            eventState = false;
+            setDisabled(false)
+            console.log('end')
+        }, 400)
     }
-
-
-
 }
 
 function selectStart(point, spped) {
@@ -104,54 +127,34 @@ function selectStart(point, spped) {
             selectPoint()
         }
         selectMove()
-        
     }, spped)
 }
 
-
-
-var current = 0,
-    prev = 0;
-
-
 function selectMove() {
-
-        current = selectNum % localStorage.length;
-
-        if (current === 0) {
+        moveNumNext = selectNum % localStorage.length;
+        if (moveNumNext === 0) {
             prev = localStorage.length - 1;
-        } 
-        
-
-        console.log(current + '지금');
-        console.log(prev + '이전');
-
-
-        tbl.children[current].children[0].style.backgroundColor = '#ccc'
-        tbl.children[prev].children[0].style.backgroundColor = '#fff'
-
-        prev = current;
-
-
-
-
-        
-
-    
-
-
-    
-    
-
-    
+        }
+        tbl.children[moveNumNext].children[0].style.backgroundColor = '#ccc'
+        tbl.children[moveNumPrev].children[0].style.backgroundColor = '#fff'
+        moveNumPrev = moveNumNext;
 }
 
+function moveInit() {
+    tbl.children[moveNumNext].children[0].style.backgroundColor = '#fff'
+    moveNumNext = 0,
+    moveNumPrev = 0;
 
+}
 
+function setDisabled(bool) {
+    var len = tbl.children.length;
+    btnAdd.disabled = bool;
+    btnAllDel.disabled = bool;
+    btnSelect.disabled = bool;
+    for (var i = 0; i < len; i++) {
+        tbl.children[i].children[0].children[0].disabled = bool
+    }
+}
 
 getStorage()
-
-
-
-
-
