@@ -70,11 +70,47 @@ body {
 }
 
 #wrapper {
-  padding: 10px;
+  padding: 10px 0;
+}
+
+.header {
+  position: relative;
+  padding: 0 230px 0 5px;
+}
+
+.header .txt {
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 30px
+}
+
+.header .btn-area {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 230px;
+  text-align: right;
+  font-size: 0;
+}
+
+.header .btn-area button{
+  display: inline-block;
+  margin-left: 5px;
+  width: 70px;
+  height: 30px;
+  font-size: 13px;
+  background: none;
+  border: 1px solid #ccc;
+}
+
+
+.tbl {
+  width: 100%;
 }
 
 .tbl th, .tbl td {
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
   transition: .1s;
 }
+
 

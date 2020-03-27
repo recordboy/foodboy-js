@@ -22,12 +22,12 @@ btnAdd.addEventListener('click', function () {
     if (!eventState) {
         var val = input.value;
         if (val === '') {
-            alert('입력 X')
+            alert('값을 입력해주세요.')
             return;
         }
         for (var i = 0; i < localStorage.length; i++) {
             if (localStorage.getItem(val)) {
-                alert('중복')
+                alert('중복된 값입니다.')
                 return;
             }
         }
@@ -48,8 +48,6 @@ tbl.addEventListener('click', function (e) {
     if (!eventState) {
         var trIdx = 0,
             trTarget = null;
-
-
         if (e.target.classList[0] === 'btn-del') {
             trIdx = e.path[2].rowIndex;
             trTarget = tbl.children[trIdx];
@@ -144,7 +142,6 @@ function moveInit() {
     tbl.children[moveNumNext].children[0].style.backgroundColor = '#fff'
     moveNumNext = 0,
     moveNumPrev = 0;
-
 }
 
 function setDisabled(bool) {
