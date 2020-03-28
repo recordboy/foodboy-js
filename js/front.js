@@ -80,21 +80,65 @@ function delAllList() {
     }
 }
 
+
+var arr = [1,2,3,4,5],
+newArr = [],
+len = arr.length,
+ran = 0,
+target = 0;
 function listMix() {
-    var arr = [1,2,3,4,5],
-        len = arr.length;
 
+    
+
+    ran = Math.floor((Math.random() * arr.length) + 1)
+    
+    console.log(arr.length)
+    console.log(arr)
+    
+    
+    
+
+    if (arr.indexOf(ran) !== -1) {
 
         
-        a = Math.floor((Math.random() * len) + 1)
-        
-        console.log(a)
 
-    for (var i = 0; i < arr.length; i++) {
+        target = arr.indexOf(ran);
+
+
+        console.log('지워질 인덱스 ' + target)
+        arr.splice(target, 1)
+        
+        // console.log(arr)
 
 
     }
 
+    // console.log(arr)
+
+    // if (arr.indexOf(ran) > 0) {
+
+
+    //     target = arr.indexOf(ran)
+
+
+    //     arr.splice(target, 1)
+        
+    //     newArr.push(ran)
+
+    // }
+
+
+
+    // for (var i = 0; i < len; i++) {
+
+    //     console.log(ran)
+
+
+    // }
+    
+
+
+    // console.log(newArr)
 
 
 }
