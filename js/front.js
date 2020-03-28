@@ -120,7 +120,7 @@ function selectPoint() {
         setTimeout(function () {
             eventState = false;
             setDisabled(false)
-            alert('야호 ~ ! ' + result + ' 당첨이다!')
+            alert(result + ' 가시죠!')
             console.log('end')
         }, 400)
     }
