@@ -81,15 +81,22 @@ function delAllList() {
 }
 
 function listMix() {
-    // var n = listFood.children;
+    var arr = [1,2,3,4,5],
+        len = arr.length;
 
 
-    // console.log(listFood.children)
+        
+        a = Math.floor((Math.random() * len) + 1)
+        
+        console.log(a)
+
+    for (var i = 0; i < arr.length; i++) {
+
+
+    }
 
 
 
-
-    
 }
 
 
