@@ -3,70 +3,67 @@ var input = null,
     btnAdd = null,
     btnAllDel = null,
     btnDel = null,
+    btnMix = null,
     btnSelect = null,
     listFood = null,
     selectSet = null,
     selectNum = 0,
     randomNum = 0,
     resuleNum = 0,
-    eventState = false,
     moveNumNext = 0,
     moveNumPrev = 0;
 
 input = document.getElementById('input-txt');
 btnAdd = document.getElementById('btn-add');
 btnAllDel = document.getElementById('btn-all-del');
+btnMix = document.getElementById('btn-mix');
 btnSelect = document.getElementById('btn-select');
 listFood = document.getElementById('list-food');
 
 btnAdd.addEventListener('click', function () {
-    if (!eventState) {
-        var val = input.value;
-        if (val === '') {
-            alert('값을 입력해주세요.')
+    var val = input.value;
+    if (val === '') {
+        alert('값을 입력해주세요.')
+        return;
+    }
+    for (var i = 0; i < localStorage.length; i++) {
+        if (localStorage.getItem(val)) {
+            alert('중복된 값입니다.')
             return;
         }
-        for (var i = 0; i < localStorage.length; i++) {
-            if (localStorage.getItem(val)) {
-                alert('중복된 값입니다.')
-                return;
-            }
-        }
-        localStorage.setItem(val, val)
-        addList(val)
-        input.value = '';
     }
+    localStorage.setItem(val, val)
+    addList(val)
+    input.value = '';
 })
 
 btnAllDel.addEventListener('click', function (e) {
-    if (!eventState) {
-        localStorage.clear()
-        delAllList()
-    }
+    localStorage.clear()
+    delAllList()
 })
 
 listFood.addEventListener('click', function (e) {
     var idx = 0,
         target = null;
-    if (!eventState) {
-        if (e.target.classList[0] === 'btnDel') {
-            for (var i = 0; i < listFood.children.length; i++) {
-                if (listFood.children[i] == e.path[1]) {
-                    target = listFood.children[idx];
-                    listFood.removeChild(target)
-                    localStorage.removeItem(e.target.previousSibling.data)
-                }
-                idx++;
+    if (e.target.classList[0] === 'btnDel') {
+        for (var i = 0; i < listFood.children.length; i++) {
+            if (listFood.children[i] == e.path[1]) {
+                target = listFood.children[idx];
+                listFood.removeChild(target)
+                localStorage.removeItem(e.target.previousSibling.data)
             }
+            idx++;
         }
     }
 })
 
+btnMix.addEventListener('click', function (e) {
+    listMix()
+})
+
 btnSelect.addEventListener('click', function (e) {
-    if (!eventState) {
-        moveInit()
-        randomSelect()
-    }
+    moveInit()
+    randomSelect()
 })
 
 function addList(val) {
@@ -83,6 +80,19 @@ function delAllList() {
     }
 }
 
+function listMix() {
+    // var n = listFood.children;
+
+
+    // console.log(listFood.children)
+
+
+
+
+    
+}
+
+
 function getStorage() {
     for (var i = 0; i < localStorage.length; i++) {
         addList(localStorage.key(i))
@@ -94,7 +104,6 @@ function randomSelect() {
         alert('2개 이상 입력하세요.')
         return;
     }
-    eventState = true;
     randomNum = Math.floor(Math.random() * localStorage.length) + 1;
     selectNum = randomNum;
     resuleNum = (randomNum + 30) % localStorage.length;
@@ -118,7 +127,6 @@ function selectPoint() {
         selectStart(30 + randomNum, 400)
     } else if (selectNum === 30 + randomNum) {
         setTimeout(function () {
-            eventState = false;
             setDisabled(false)
             alert(result + ' 가시죠!')
             console.log('end')
@@ -148,7 +156,6 @@ function selectMove() {
 }
 
 function moveInit() {
-    listFood.children[moveNumNext].classList.remove('on')
     moveNumNext = 0;
     moveNumPrev = 0;
 }
@@ -157,6 +164,7 @@ function setDisabled(bool) {
     var len = listFood.children.length;
     btnAdd.disabled = bool;
     btnAllDel.disabled = bool;
+    btnMix.disabled = bool;
     btnSelect.disabled = bool;
     for (var i = 0; i < len; i++) {
         listFood.children[i].children[0].disabled = bool;

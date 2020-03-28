@@ -99,7 +99,7 @@ button:disabled {
 
 .header {
   position: relative;
-  padding: 0 230px 0 5px;
+  padding: 0 305px 0 5px;
 }
 
 .header .inputTxt {
@@ -113,7 +113,7 @@ button:disabled {
   position: absolute;
   top: 0;
   right: 5px;
-  width: 220px;
+  width: 295px;
   text-align: right;
   font-size: 0;
 }
