@@ -104,6 +104,8 @@ function randomSelect() {
 }
 
 function selectPoint() {
+    var reslutLen = listFood.children[resuleNum].textContent.length,
+        result = listFood.children[resuleNum].textContent.substr(0, reslutLen - 6);
     if (selectNum === randomNum) {
         selectStart(10 + randomNum, 30)
     } else if (selectNum === 10 + randomNum) {
@@ -118,7 +120,7 @@ function selectPoint() {
         setTimeout(function () {
             eventState = false;
             setDisabled(false)
-            alert('야호 ~ ! ' + listFood.children[resuleNum].textContent + ' 당첨이다!')
+            alert('야호 ~ ! ' + result + ' 당첨이다!')
             console.log('end')
         }, 400)
     }
