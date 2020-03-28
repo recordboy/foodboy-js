@@ -8,8 +8,9 @@ var input = null,
     selectSet = null,
     selectNum = 0,
     randomNum = 0,
-    eventState = false;
-moveNumNext = 0,
+    resuleNum = 0,
+    eventState = false,
+    moveNumNext = 0,
     moveNumPrev = 0;
 
 input = document.getElementById('input-txt');
@@ -47,10 +48,8 @@ btnAllDel.addEventListener('click', function (e) {
 listFood.addEventListener('click', function (e) {
     var idx = 0,
         target = null;
-
     if (!eventState) {
         if (e.target.classList[0] === 'btnDel') {
-
             for (var i = 0; i < listFood.children.length; i++) {
                 if (listFood.children[i] == e.path[1]) {
                     target = listFood.children[idx];
@@ -59,23 +58,8 @@ listFood.addEventListener('click', function (e) {
                 }
                 idx++;
             }
-
-
-
-
-
-
-
-
-
-
-
         }
     }
-
-
-
-
 })
 
 btnSelect.addEventListener('click', function (e) {
@@ -113,9 +97,10 @@ function randomSelect() {
     eventState = true;
     randomNum = Math.floor(Math.random() * localStorage.length) + 1;
     selectNum = randomNum;
+    resuleNum = (randomNum + 30) % localStorage.length;
     selectPoint()
     setDisabled(true)
-    console.log('result index : ' + (randomNum + 30) % localStorage.length)
+    console.log('result index : ' + resuleNum)
 }
 
 function selectPoint() {
@@ -133,6 +118,7 @@ function selectPoint() {
         setTimeout(function () {
             eventState = false;
             setDisabled(false)
+            alert('야호 ~ ! ' + listFood.children[resuleNum].textContent + ' 당첨이다!')
             console.log('end')
         }, 400)
     }
@@ -154,15 +140,15 @@ function selectMove() {
     if (moveNumNext === 0) {
         prev = localStorage.length - 1;
     }
-    listFood.children[moveNumNext].style.backgroundColor = '#ccc'
-    listFood.children[moveNumPrev].style.backgroundColor = '#fff'
+    listFood.children[moveNumNext].classList.add('on')
+    listFood.children[moveNumPrev].classList.remove('on')
     moveNumPrev = moveNumNext;
 }
 
 function moveInit() {
-    listFood.children[moveNumNext].style.backgroundColor = '#fff'
-    moveNumNext = 0,
-        moveNumPrev = 0;
+    listFood.children[moveNumNext].classList.remove('on')
+    moveNumNext = 0;
+    moveNumPrev = 0;
 }
 
 function setDisabled(bool) {
@@ -171,14 +157,8 @@ function setDisabled(bool) {
     btnAllDel.disabled = bool;
     btnSelect.disabled = bool;
     for (var i = 0; i < len; i++) {
-        listFood.children[i].children[0].disabled = bool
+        listFood.children[i].children[0].disabled = bool;
     }
 }
-
-
-function aa() {
-
-}
-
 
 getStorage()
