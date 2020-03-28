@@ -4,19 +4,19 @@ var input = null,
     btnAllDel = null,
     btnDel = null,
     btnSelect = null,
-    tbl = null,
+    listFood = null,
     selectSet = null,
     selectNum = 0,
     randomNum = 0,
     eventState = false;
-    moveNumNext = 0,
+moveNumNext = 0,
     moveNumPrev = 0;
 
 input = document.getElementById('input-txt');
 btnAdd = document.getElementById('btn-add');
 btnAllDel = document.getElementById('btn-all-del');
 btnSelect = document.getElementById('btn-select');
-tbl = document.getElementById('tbl');
+listFood = document.getElementById('list-food');
 
 btnAdd.addEventListener('click', function () {
     if (!eventState) {
@@ -32,7 +32,7 @@ btnAdd.addEventListener('click', function () {
             }
         }
         localStorage.setItem(val, val)
-        addTbl(val)
+        addList(val)
         input.value = '';
     }
 })
@@ -40,21 +40,42 @@ btnAdd.addEventListener('click', function () {
 btnAllDel.addEventListener('click', function (e) {
     if (!eventState) {
         localStorage.clear()
-        delAllTbl()
+        delAllList()
     }
 })
 
-tbl.addEventListener('click', function (e) {
+listFood.addEventListener('click', function (e) {
+    var idx = 0,
+        target = null;
+
     if (!eventState) {
-        var trIdx = 0,
-            trTarget = null;
-        if (e.target.classList[0] === 'btn-del') {
-            trIdx = e.path[2].rowIndex;
-            trTarget = tbl.children[trIdx];
-            tbl.removeChild(trTarget);
-            localStorage.removeItem(e.target.previousSibling.data)
+        if (e.target.classList[0] === 'btnDel') {
+
+            for (var i = 0; i < listFood.children.length; i++) {
+                if (listFood.children[i] == e.path[1]) {
+                    target = listFood.children[idx];
+                    listFood.removeChild(target)
+                    localStorage.removeItem(e.target.previousSibling.data)
+                }
+                idx++;
+            }
+
+
+
+
+
+
+
+
+
+
+
         }
     }
+
+
+
+
 })
 
 btnSelect.addEventListener('click', function (e) {
@@ -64,23 +85,23 @@ btnSelect.addEventListener('click', function (e) {
     }
 })
 
-function addTbl(val) {
-    var tr = document.createElement('tr');
-    tr.innerHTML = '<td>' + val + '<button type="button" class="btn-del">delete</button></td>';
-    tbl.appendChild(tr)
-    btnDel = document.getElementsByClassName('btn-del');
+function addList(val) {
+    var li = document.createElement('li');
+    li.innerHTML = val + '<button type="button" class="btnDel">delete</button>';
+    listFood.appendChild(li)
+    btnDel = document.getElementsByClassName('btnDel');
 }
 
-function delAllTbl() {
-    var len = tbl.children.length;
+function delAllList() {
+    var len = listFood.children.length;
     for (var i = 0; i < len; i++) {
-        tbl.removeChild(tbl.children[0])
+        listFood.removeChild(listFood.children[0])
     }
 }
 
 function getStorage() {
     for (var i = 0; i < localStorage.length; i++) {
-        addTbl(localStorage.key(i))
+        addList(localStorage.key(i))
     }
 }
 
@@ -109,7 +130,7 @@ function selectPoint() {
     } else if (selectNum === 25 + randomNum) {
         selectStart(30 + randomNum, 400)
     } else if (selectNum === 30 + randomNum) {
-        setTimeout(function(){
+        setTimeout(function () {
             eventState = false;
             setDisabled(false)
             console.log('end')
@@ -129,29 +150,35 @@ function selectStart(point, spped) {
 }
 
 function selectMove() {
-        moveNumNext = selectNum % localStorage.length;
-        if (moveNumNext === 0) {
-            prev = localStorage.length - 1;
-        }
-        tbl.children[moveNumNext].children[0].style.backgroundColor = '#ccc'
-        tbl.children[moveNumPrev].children[0].style.backgroundColor = '#fff'
-        moveNumPrev = moveNumNext;
+    moveNumNext = selectNum % localStorage.length;
+    if (moveNumNext === 0) {
+        prev = localStorage.length - 1;
+    }
+    listFood.children[moveNumNext].style.backgroundColor = '#ccc'
+    listFood.children[moveNumPrev].style.backgroundColor = '#fff'
+    moveNumPrev = moveNumNext;
 }
 
 function moveInit() {
-    tbl.children[moveNumNext].children[0].style.backgroundColor = '#fff'
+    listFood.children[moveNumNext].style.backgroundColor = '#fff'
     moveNumNext = 0,
-    moveNumPrev = 0;
+        moveNumPrev = 0;
 }
 
 function setDisabled(bool) {
-    var len = tbl.children.length;
+    var len = listFood.children.length;
     btnAdd.disabled = bool;
     btnAllDel.disabled = bool;
     btnSelect.disabled = bool;
     for (var i = 0; i < len; i++) {
-        tbl.children[i].children[0].children[0].disabled = bool
+        listFood.children[i].children[0].disabled = bool
     }
 }
+
+
+function aa() {
+
+}
+
 
 getStorage()

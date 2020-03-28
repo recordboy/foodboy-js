@@ -69,8 +69,28 @@ body {
   line-height: 1.6;
 }
 
+/**********/
+/* COMMON */
+/**********/
+
+button {
+  display: inline-block;
+  border: 0;
+  padding: 0;
+  width: 70px;
+  height: 40px;
+  font-size: 14px;
+  background: none;
+  background-color: #ff9933;
+  color: #fff;
+}
+
+/**********/
+/* LAYOUT */
+/**********/
+
 #wrapper {
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
 .header {
@@ -78,39 +98,49 @@ body {
   padding: 0 230px 0 5px;
 }
 
-.header .txt {
-  border: 1px solid #ccc;
+.header .inputTxt {
+  border: 1px solid #ff9933;
+  padding: 0 5px;
   width: 100%;
-  height: 30px
+  height: 40px
 }
 
-.header .btn-area {
+.header .btnArea {
   position: absolute;
   top: 0;
   right: 5px;
-  width: 230px;
+  width: 220px;
   text-align: right;
   font-size: 0;
 }
 
-.header .btn-area button{
-  display: inline-block;
+.header .btnArea button {
   margin-left: 5px;
-  width: 70px;
-  height: 30px;
-  font-size: 13px;
-  background: none;
-  border: 1px solid #ccc;
 }
 
+.header .btnArea button:first-child {
+  margin-left: 0;
+}
 
-.tbl {
+.list {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
   width: 100%;
 }
 
-.tbl th, .tbl td {
-  border-top: 1px solid #ccc;
+.list li {
+  border-bottom: 1px solid #ccc;
+  position: relative;
+  padding: 0 5px;
+  height: 40px;
+  line-height: 38px;
   transition: .1s;
 }
 
+
+.list li button {
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
 
