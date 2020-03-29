@@ -86,6 +86,7 @@ function listMix(len) {
         ranIdx = 0,
         ran = 0,
         target = 0;
+    listFood.children[moveNumPrev].classList.remove('on')
     for (var i = 0; i < len; i++) {
         arr.push(i)
     }
@@ -101,7 +102,7 @@ function listMix(len) {
         listFood.appendChild(listFood.children[newArr[j]])
     }
     console.log(newArr)
-    // // 랜덤 섞기 알고리즘
+    // // 랜덤 섞기
     // var arr = [1, 2, 3, 4, 5],
     //     newArr = [],
     //     len = arr.length,
@@ -111,7 +112,6 @@ function listMix(len) {
 
     // console.log(arr)
     // for (var i = 0; i < len; i++) {
-        
     //     ranIdx = Math.floor((Math.random() * arr.length))
     //     ran = arr[ranIdx]
     //     if (arr.indexOf(ran) !== -1) {
