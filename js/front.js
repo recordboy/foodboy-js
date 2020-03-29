@@ -75,53 +75,33 @@ function addList(val) {
 
 function delAllList() {
     var len = listFood.children.length;
-    for (var i = 1; i < len; i++) {
+    for (var i = 0; i < len; i++) {
         listFood.removeChild(listFood.children[0])
     }
 }
 
-
-function listMix(listLen) {
-
-    var listReset = [],
+function listMix(len) {
+    var arr = [],
         newArr = [],
         ranIdx = 0,
         ran = 0,
         target = 0;
-    
-    for (var i = 0; i < listLen; i++) {
-        listReset.push(i)
+    for (var i = 0; i < len; i++) {
+        arr.push(i)
     }
-    
-    console.log(listReset)
-    
-
-
-    for (var i = 0; i < listReset.length; i++) {
-        
-        ranIdx = Math.floor((Math.random() * listReset.length))
-        ran = listReset[ranIdx]
-        if (listReset.indexOf(ran) !== -1) {
-            target = listReset.indexOf(ran);
-            listReset.splice(target, 1)
+    console.log(arr)
+    for (var j = 0; j < len; j++) {
+        ranIdx = Math.floor((Math.random() * arr.length))
+        ran = arr[ranIdx]
+        if (arr.indexOf(ran) !== -1) {
+            target = arr.indexOf(ran)
+            arr.splice(target, 1)
             newArr.push(ran)
         }
+        listFood.appendChild(listFood.children[newArr[j]])
     }
     console.log(newArr)
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // 랜덤 섞기 알고리즘
+    // // 랜덤 섞기 알고리즘
     // var arr = [1, 2, 3, 4, 5],
     //     newArr = [],
     //     len = arr.length,
@@ -129,7 +109,7 @@ function listMix(listLen) {
     //     ran = 0,
     //     target = 0;
 
-    // // console.log(arr)
+    // console.log(arr)
     // for (var i = 0; i < len; i++) {
         
     //     ranIdx = Math.floor((Math.random() * arr.length))
@@ -140,7 +120,7 @@ function listMix(listLen) {
     //         newArr.push(ran)
     //     }
     // }
-    // // console.log(newArr)
+    // console.log(newArr)
 }
 
 
