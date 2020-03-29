@@ -1,3 +1,9 @@
+/*
+ * @object name : 추후 객체 지정 예정
+ * @info : 기록맨
+ * @date : 2020-03-29
+ * @author : 기록맨
+ */
 
 var input = null,
     btnAdd = null,
