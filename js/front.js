@@ -64,6 +64,13 @@ listFood.addEventListener('click', function (e) {
 })
 
 btnMix.addEventListener('click', function (e) {
+    if (listFood.children.length <= 0) {
+        alert('항목이 없습니다.')
+        return;
+    } else if (listFood.children.length < 2) {
+        alert('항목을 2개 이상 입력하세요.')
+        return;
+    }
     listMix(listFood.children.length)
 })
 
@@ -138,7 +145,7 @@ function getStorage() {
 
 function randomSelect() {
     if (localStorage.length <= 1) {
-        alert('2개 이상 입력하세요.')
+        alert('항목을 2개 이상 입력하세요.')
         return;
     }
     randomNum = Math.floor(Math.random() * localStorage.length) + 1;
