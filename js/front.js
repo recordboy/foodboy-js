@@ -75,41 +75,46 @@ function addList(val) {
 
 function delAllList() {
     var len = listFood.children.length;
-    for (var i = 0; i < len; i++) {
+    for (var i = 1; i < len; i++) {
         listFood.removeChild(listFood.children[0])
     }
 }
 
 
-function listMix(len) {
+function listMix(listLen) {
 
-    var arr = [],
+    var listReset = [],
         newArr = [],
-        len = arr.length,
         ranIdx = 0,
         ran = 0,
         target = 0;
     
-    for (var i = 0; i < len; i++) {
-        arr.push(i)
+    for (var i = 0; i < listLen; i++) {
+        listReset.push(i)
     }
     
-    console.log(arr)
+    console.log(listReset)
+    
 
 
-
-    // // console.log(arr)
-    // for (var i = 0; i < len; i++) {
+    for (var i = 0; i < listReset.length; i++) {
         
-    //     ranIdx = Math.floor((Math.random() * arr.length))
-    //     ran = arr[ranIdx]
-    //     if (arr.indexOf(ran) !== -1) {
-    //         target = arr.indexOf(ran);
-    //         arr.splice(target, 1)
-    //         newArr.push(ran)
-    //     }
-    // }
-    // // console.log(newArr)
+        ranIdx = Math.floor((Math.random() * listReset.length))
+        ran = listReset[ranIdx]
+        if (listReset.indexOf(ran) !== -1) {
+            target = listReset.indexOf(ran);
+            listReset.splice(target, 1)
+            newArr.push(ran)
+        }
+    }
+    console.log(newArr)
+
+
+
+
+
+
+
 
 
 
