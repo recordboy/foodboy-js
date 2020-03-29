@@ -58,7 +58,7 @@ listFood.addEventListener('click', function (e) {
 })
 
 btnMix.addEventListener('click', function (e) {
-    listMix()
+    listMix(listFood.children.length)
 })
 
 btnSelect.addEventListener('click', function (e) {
@@ -81,66 +81,61 @@ function delAllList() {
 }
 
 
-var arr = [1,2,3,4,5],
-newArr = [],
-len = arr.length,
-ran = 0,
-target = 0;
-function listMix() {
+function listMix(len) {
 
+    var arr = [],
+        newArr = [],
+        len = arr.length,
+        ranIdx = 0,
+        ran = 0,
+        target = 0;
     
-
-    ran = Math.floor((Math.random() * arr.length) + 1)
-    
-    console.log(arr.length)
-    console.log(arr)
-    
-    
-    
-
-    if (arr.indexOf(ran) !== -1) {
-
-        
-
-        target = arr.indexOf(ran);
-
-
-        console.log('지워질 인덱스 ' + target)
-        arr.splice(target, 1)
-        
-        // console.log(arr)
-
-
+    for (var i = 0; i < len; i++) {
+        arr.push(i)
     }
-
-    // console.log(arr)
-
-    // if (arr.indexOf(ran) > 0) {
-
-
-    //     target = arr.indexOf(ran)
-
-
-    //     arr.splice(target, 1)
-        
-    //     newArr.push(ran)
-
-    // }
-
-
-
-    // for (var i = 0; i < len; i++) {
-
-    //     console.log(ran)
-
-
-    // }
     
+    console.log(arr)
 
 
-    // console.log(newArr)
+
+    // // console.log(arr)
+    // for (var i = 0; i < len; i++) {
+        
+    //     ranIdx = Math.floor((Math.random() * arr.length))
+    //     ran = arr[ranIdx]
+    //     if (arr.indexOf(ran) !== -1) {
+    //         target = arr.indexOf(ran);
+    //         arr.splice(target, 1)
+    //         newArr.push(ran)
+    //     }
+    // }
+    // // console.log(newArr)
 
 
+
+
+
+
+    // 랜덤 섞기 알고리즘
+    // var arr = [1, 2, 3, 4, 5],
+    //     newArr = [],
+    //     len = arr.length,
+    //     ranIdx = 0,
+    //     ran = 0,
+    //     target = 0;
+
+    // // console.log(arr)
+    // for (var i = 0; i < len; i++) {
+        
+    //     ranIdx = Math.floor((Math.random() * arr.length))
+    //     ran = arr[ranIdx]
+    //     if (arr.indexOf(ran) !== -1) {
+    //         target = arr.indexOf(ran);
+    //         arr.splice(target, 1)
+    //         newArr.push(ran)
+    //     }
+    // }
+    // // console.log(newArr)
 }
 
 
