@@ -1,4 +1,9 @@
 # FoodBoy
 
-* 식당 결정 장애를 위한 항목 선택 화면
-* VanillaJS로 제작되었으며, 기본적인 형태만 있는 화면
+## 결과 화면
+https://recordboy.github.io/foodboy-js/
+
+## 기본 설명
+* 음식점 결정 장애를 위한 항목 선택 화면
+* 추후 작업을 위해 기본 형태만 작업
+* VanillaJS로 제작
