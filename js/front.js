@@ -115,25 +115,6 @@ function listMix(len) {
         listFood.appendChild(listFood.children[newArr[j]])
     }
     console.log(newArr)
-    // // 랜덤 섞기
-    // var arr = [1, 2, 3, 4, 5],
-    //     newArr = [],
-    //     len = arr.length,
-    //     ranIdx = 0,
-    //     ran = 0,
-    //     target = 0;
-
-    // console.log(arr)
-    // for (var i = 0; i < len; i++) {
-    //     ranIdx = Math.floor((Math.random() * arr.length))
-    //     ran = arr[ranIdx]
-    //     if (arr.indexOf(ran) !== -1) {
-    //         target = arr.indexOf(ran);
-    //         arr.splice(target, 1)
-    //         newArr.push(ran)
-    //     }
-    // }
-    // console.log(newArr)
 }
 
 
@@ -172,8 +153,13 @@ function selectPoint() {
     } else if (selectNum === 30 + randomNum) {
         setTimeout(function () {
             setDisabled(false)
-            alert(result + ' 가시죠!')
-            console.log('end')
+
+            // var go = confirm(result + ' 가시죠!');
+            // if (go === true) {
+            //   localStorage.setItem(aa, result);
+            //   alert(aa)
+
+            // }
         }, 400)
     }
 }
