@@ -18,6 +18,7 @@ var input = null,
     resuleNum = 0,
     moveNumNext = 0,
     moveNumPrev = 0,
+    historyFood,
     foodList = [];
 
 input = document.getElementById('input-txt');
@@ -26,6 +27,7 @@ btnAllDel = document.getElementById('btn-all-del');
 btnMix = document.getElementById('btn-mix');
 btnSelect = document.getElementById('btn-select');
 listFood = document.getElementById('list-food');
+historyFood = document.getElementById('history-food');
 selectFood = document.getElementById('select-food');
 
 btnAdd.addEventListener('click', function () {
@@ -215,19 +217,22 @@ function setFoodData(res, food) {
 }
 
 function createFoodList(foodList) {
-  // let today = new Date();   
+  var today = new Date(),
+  // day = today.getDay(),
+  day = 3,
+  count = day;
+
+  for (var i = 0; i <= 6; i++) {
+    count++;
+    if (count > 6) {
+      count = 0;
+    }
+
+    console.log(count);
+    var li = document.createElement('li');
+  }
   
-  // let year = today.getFullYear(); // 년도
-  // let month = today.getMonth() + 1;  // 월
-  // let date = today.getDate();  // 날짜
-  // let day = today.getDay();  // 요일
-  
-  // document.write(year + '/' + month + '/' + date)
-  // document.write('<br>')
-  // document.write(day);
-  
-  // console.log(foodList);
 }
 
-
 getStorage();
+createFoodList();
