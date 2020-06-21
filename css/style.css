@@ -76,12 +76,13 @@ body {
 button {
   display: inline-block;
   border: 0;
+  border-radius: 2.5px;
   padding: 0;
   width: 70px;
   height: 40px;
   font-size: 14px;
   background: none;
-  background-color: #ff9933;
+  background-color: #ff6699;
   color: #fff;
 }
 
@@ -142,7 +143,7 @@ button:disabled {
 }
 
 .listFood li.on {
-  background-color: #ff9933;
+  background-color: #ff6699;
   color: #fff;
 }
 
@@ -155,21 +156,39 @@ button:disabled {
 
 .listFood li.on button {
   background-color: #fff;
-  color: #ff9933;
+  color: #ff6699;
 }
 
-.question {
+.selectFood {
+  display: none;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
 }
 
-.question:before {
+.selectFood:before {
   content: '';
   position: absolute;
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.selectFood .cnt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  padding: 20px;
+  width: 250px;
+  height: 120px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.selectFood .cnt .btn {
+  margin-top: 10px;
 }

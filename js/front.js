@@ -25,6 +25,7 @@ btnAllDel = document.getElementById('btn-all-del');
 btnMix = document.getElementById('btn-mix');
 btnSelect = document.getElementById('btn-select');
 listFood = document.getElementById('list-food');
+selectFood = document.getElementById('selectFood');
 
 btnAdd.addEventListener('click', function () {
     var val = input.value;
@@ -152,15 +153,11 @@ function selectPoint() {
         selectStart(30 + randomNum, 400)
     } else if (selectNum === 30 + randomNum) {
         setTimeout(function () {
-            setDisabled(false)
-
-            // var go = confirm(result + ' 가시죠!');
-            // if (go === true) {
-            //   localStorage.setItem(aa, result);
-            //   alert(aa)
-
-            // }
-        }, 400)
+            alert(result + '가시져');
+            setDisabled(false);
+            // selectFood.style.display = 'block';
+            // selectFood.getElementsByClassName('target')[0].innerHTML = result;
+        }, 400);
     }
 }
 
@@ -171,7 +168,7 @@ function selectStart(point, spped) {
             clearInterval(selectSet)
             selectPoint()
         }
-        selectMove()
+        selectMove();
     }, spped)
 }
 
@@ -201,4 +198,4 @@ function setDisabled(bool) {
     }
 }
 
-getStorage()
+getStorage();
