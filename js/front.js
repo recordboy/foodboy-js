@@ -30,23 +30,23 @@ selectFood = document.getElementById('selectFood');
 btnAdd.addEventListener('click', function () {
     var val = input.value;
     if (val === '') {
-        alert('값을 입력해주세요.')
+        alert('값을 입력해주세요.');
         return;
     }
     for (var i = 0; i < localStorage.length; i++) {
         if (localStorage.getItem(val)) {
-            alert('중복된 값입니다.')
+            alert('중복된 값입니다.');
             return;
         }
     }
-    localStorage.setItem(val, val)
-    addList(val)
+    localStorage.setItem(val, val);
+    addList(val);
     input.value = '';
 })
 
 btnAllDel.addEventListener('click', function (e) {
-    localStorage.clear()
-    delAllList()
+    localStorage.clear();
+    delAllList();
 })
 
 listFood.addEventListener('click', function (e) {
@@ -56,8 +56,8 @@ listFood.addEventListener('click', function (e) {
         for (var i = 0; i < listFood.children.length; i++) {
             if (listFood.children[i] == e.path[1]) {
                 target = listFood.children[idx];
-                listFood.removeChild(target)
-                localStorage.removeItem(e.target.previousSibling.data)
+                listFood.removeChild(target);
+                localStorage.removeItem(e.target.previousSibling.data);
             }
             idx++;
         }
@@ -66,31 +66,39 @@ listFood.addEventListener('click', function (e) {
 
 btnMix.addEventListener('click', function (e) {
     if (listFood.children.length <= 0) {
-        alert('항목이 없습니다.')
+        alert('항목이 없습니다.');
         return;
     } else if (listFood.children.length < 2) {
-        alert('항목을 2개 이상 입력하세요.')
+        alert('항목을 2개 이상 입력하세요.');
         return;
     }
-    listMix(listFood.children.length)
+    listMix(listFood.children.length);
 })
 
 btnSelect.addEventListener('click', function (e) {
-    moveInit()
-    randomSelect()
+    moveInit();
+    randomSelect();
+})
+
+selectFood.getElementsByClassName('yes')[0].addEventListener('click', function (e) {
+  go(true);
+})
+
+selectFood.getElementsByClassName('no')[0].addEventListener('click', function (e) {
+  go(false);
 })
 
 function addList(val) {
     var li = document.createElement('li');
     li.innerHTML = val + '<button type="button" class="btnDel">delete</button>';
-    listFood.appendChild(li)
+    listFood.appendChild(li);
     btnDel = document.getElementsByClassName('btnDel');
 }
 
 function delAllList() {
     var len = listFood.children.length;
     for (var i = 0; i < len; i++) {
-        listFood.removeChild(listFood.children[0])
+        listFood.removeChild(listFood.children[0]);
     }
 }
 
@@ -100,28 +108,28 @@ function listMix(len) {
         ranIdx = 0,
         ran = 0,
         target = 0;
-    listFood.children[moveNumPrev].classList.remove('on')
+    listFood.children[moveNumPrev].classList.remove('on');
     for (var i = 0; i < len; i++) {
-        arr.push(i)
+        arr.push(i);
     }
     console.log(arr)
     for (var j = 0; j < len; j++) {
-        ranIdx = Math.floor((Math.random() * arr.length))
-        ran = arr[ranIdx]
+        ranIdx = Math.floor((Math.random() * arr.length));
+        ran = arr[ranIdx];
         if (arr.indexOf(ran) !== -1) {
-            target = arr.indexOf(ran)
-            arr.splice(target, 1)
-            newArr.push(ran)
+            target = arr.indexOf(ran);
+            arr.splice(target, 1);
+            newArr.push(ran);
         }
-        listFood.appendChild(listFood.children[newArr[j]])
+        listFood.appendChild(listFood.children[newArr[j]]);
     }
-    console.log(newArr)
+    console.log(newArr);
 }
 
 
 function getStorage() {
     for (var i = 0; i < localStorage.length; i++) {
-        addList(localStorage.key(i))
+        addList(localStorage.key(i));
     }
 }
 
@@ -133,30 +141,30 @@ function randomSelect() {
     randomNum = Math.floor(Math.random() * localStorage.length) + 1;
     selectNum = randomNum;
     resuleNum = (randomNum + 30) % localStorage.length;
-    selectPoint()
-    setDisabled(true)
-    console.log('result index : ' + resuleNum)
+    selectPoint();
+    setDisabled(true);
+    console.log('result index : ' + resuleNum);
 }
 
 function selectPoint() {
     var reslutLen = listFood.children[resuleNum].textContent.length,
         result = listFood.children[resuleNum].textContent.substr(0, reslutLen - 6);
     if (selectNum === randomNum) {
-        selectStart(10 + randomNum, 30)
+        selectStart(10 + randomNum, 30);
     } else if (selectNum === 10 + randomNum) {
-        selectStart(15 + randomNum, 60)
+        selectStart(15 + randomNum, 60);
     } else if (selectNum === 15 + randomNum) {
-        selectStart(20 + randomNum, 120)
+        selectStart(20 + randomNum, 120);
     } else if (selectNum === 20 + randomNum) {
-        selectStart(25 + randomNum, 240)
+        selectStart(25 + randomNum, 240);
     } else if (selectNum === 25 + randomNum) {
-        selectStart(30 + randomNum, 400)
+        selectStart(30 + randomNum, 400);
     } else if (selectNum === 30 + randomNum) {
         setTimeout(function () {
-            alert(result + '가시져');
+            // alert(result + '가시져');
             setDisabled(false);
-            // selectFood.style.display = 'block';
-            // selectFood.getElementsByClassName('target')[0].innerHTML = result;
+            selectFood.style.display = 'block';
+            selectFood.getElementsByClassName('target')[0].innerHTML = result;
         }, 400);
     }
 }
@@ -165,8 +173,8 @@ function selectStart(point, spped) {
     selectSet = setInterval(function () {
         selectNum++;
         if (selectNum === point) {
-            clearInterval(selectSet)
-            selectPoint()
+            clearInterval(selectSet);
+            selectPoint();
         }
         selectMove();
     }, spped)
@@ -197,5 +205,10 @@ function setDisabled(bool) {
         listFood.children[i].children[0].disabled = bool;
     }
 }
+
+function go() {
+  
+}
+
 
 getStorage();
