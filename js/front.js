@@ -17,7 +17,8 @@ var input = null,
     randomNum = 0,
     resuleNum = 0,
     moveNumNext = 0,
-    moveNumPrev = 0;
+    moveNumPrev = 0,
+    foodList = [];
 
 input = document.getElementById('input-txt');
 btnAdd = document.getElementById('btn-add');
@@ -25,7 +26,7 @@ btnAllDel = document.getElementById('btn-all-del');
 btnMix = document.getElementById('btn-mix');
 btnSelect = document.getElementById('btn-select');
 listFood = document.getElementById('list-food');
-selectFood = document.getElementById('selectFood');
+selectFood = document.getElementById('select-food');
 
 btnAdd.addEventListener('click', function () {
     var val = input.value;
@@ -42,12 +43,12 @@ btnAdd.addEventListener('click', function () {
     localStorage.setItem(val, val);
     addList(val);
     input.value = '';
-})
+});
 
 btnAllDel.addEventListener('click', function (e) {
     localStorage.clear();
     delAllList();
-})
+});
 
 listFood.addEventListener('click', function (e) {
     var idx = 0,
@@ -62,7 +63,7 @@ listFood.addEventListener('click', function (e) {
             idx++;
         }
     }
-})
+});
 
 btnMix.addEventListener('click', function (e) {
     if (listFood.children.length <= 0) {
@@ -73,20 +74,21 @@ btnMix.addEventListener('click', function (e) {
         return;
     }
     listMix(listFood.children.length);
-})
+});
 
 btnSelect.addEventListener('click', function (e) {
     moveInit();
     randomSelect();
-})
+});
 
 selectFood.getElementsByClassName('yes')[0].addEventListener('click', function (e) {
-  go(true);
-})
+  selectFood.style.display = 'none';
+  setFoodData(true, selectFood.getElementsByClassName('target')[0].textContent);
+});
 
 selectFood.getElementsByClassName('no')[0].addEventListener('click', function (e) {
-  go(false);
-})
+  selectFood.style.display = 'none';
+});
 
 function addList(val) {
     var li = document.createElement('li');
@@ -161,7 +163,6 @@ function selectPoint() {
         selectStart(30 + randomNum, 400);
     } else if (selectNum === 30 + randomNum) {
         setTimeout(function () {
-            // alert(result + '가시져');
             setDisabled(false);
             selectFood.style.display = 'block';
             selectFood.getElementsByClassName('target')[0].innerHTML = result;
@@ -206,8 +207,26 @@ function setDisabled(bool) {
     }
 }
 
-function go() {
+function setFoodData(res, food) {
+  if (res) {
+    foodList.push(food);
+    createFoodList(foodList);
+  }
+}
+
+function createFoodList(foodList) {
+  // let today = new Date();   
   
+  // let year = today.getFullYear(); // 년도
+  // let month = today.getMonth() + 1;  // 월
+  // let date = today.getDate();  // 날짜
+  // let day = today.getDay();  // 요일
+  
+  // document.write(year + '/' + month + '/' + date)
+  // document.write('<br>')
+  // document.write(day);
+  
+  // console.log(foodList);
 }
 
 
