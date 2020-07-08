@@ -8,3 +8,4 @@ https://recordboy.github.io/foodboy-js/
 * 추후 작업을 위해 기본 뼈대만 작업
 * 추가 항목들은 Local Storage에 저장
 * VanillaJS로 제작
+프리티어 수정 예정
