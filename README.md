@@ -1,5 +1,4 @@
-# FoodB
-oy-JS
+# FoodBoy-JS
 
 수정예정
 
