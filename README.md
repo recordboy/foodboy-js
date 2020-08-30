@@ -1,1 +1,3 @@
 # FoodBoy-JS
+
+foodBoy prototype
